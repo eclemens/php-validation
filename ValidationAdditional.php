@@ -1,6 +1,6 @@
 <?php
 
-require_once 'mp/utils/Validation.php';
+require_once './Validation.php';
 
 class ValidationAdditional extends Validation
 {
