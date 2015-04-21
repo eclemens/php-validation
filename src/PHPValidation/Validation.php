@@ -189,21 +189,19 @@ class Validation
         if (isset($this->messages[$rule])) {
             $message = $this->messages[$rule];
         } elseif (isset($this->methods[$rule])) {
-            $message = $this->methods[$rule]->message;
+            $message = $this->methods[$rule]->message($options, $value);
+        }
+
+        if (is_callable($message)) {
+            $message = $message($options, $value);
         }
 
         if (isset($message) && is_string($message)) {
             if (is_array($options)) {
-                $message = @vsprintf($message, $options);
+                $message = @vsprintf($message, $options) ?: $message;
             } else {
-                $message = @sprintf($message, $options);
+                $message = @sprintf($message, $options) ?: $message;
             }
-
-            if (!$message) {
-                $message = $message;
-            }
-        } elseif (is_callable($message)) {
-            $message = $message($options, $value);
         }
 
         return is_string($message) ? $message : '';
