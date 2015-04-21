@@ -27,17 +27,17 @@ $validator = new PHPValidation\Validation();
 
 // Add rules
 $validator->rules([
-    'username' => ['required' => true, 'rangelength' => [3, 64]],
-    'email' => ['required' => true, 'email'true],
-    'password' => ['required' => true],
+    'username'   => ['required' => true, 'rangelength' => [3, 64]],
+    'email'      => ['required' => true, 'email'true],
+    'password'   => ['required' => true],
     'repassword' => ['equalTo' => 'password'],
 ]);
 
 // Data
 $data = [
-    'username' => 'johndoe',
-    'email' => 'johndoe@example.org',
-    'password' => 'pass1234',
+    'username'   => 'johndoe',
+    'email'      => 'johndoe@example.org',
+    'password'   => 'pass1234',
     'repassword' => 'pass1234'
 ];
 
