@@ -2,16 +2,25 @@
 
 namespace PHPValidation\Rules;
 
+/**
+ * Makes the element require a valid email.
+ *
+ * `email`
+ */
 class Email extends Base
 {
-    protected $message = "Please enter a valid email address.";
-    protected $validation = "Please enter a valid email address.";
+    public $message = "Please enter a valid email address.";
 
-    public function __contruct(\PHPValidation\Validation $validation) {
-        $this->validation = $validation;
-    }
-
-    public function validate() {
-
+    /**
+     * Makes the element require a valid email
+     *
+     * @param  mixed $value
+     * @param  mixed $options
+     *
+     * @return boolean
+     */
+    public function validate($value, $options = null)
+    {
+        return $this->validation->optional($value) || filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 }

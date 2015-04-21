@@ -3,7 +3,11 @@
 namespace PHPValidation\Rules;
 
 abstract class Base implements RuleInterface {
-    protected $message;
+    public $message;
+    protected $validation;
 
-    abstract public function getMessage();
+    public function __construct(\PHPValidation\Validation &$validation)
+    {
+        $this->validation = $validation;
+    }
 }
