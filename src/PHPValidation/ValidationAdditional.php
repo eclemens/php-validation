@@ -1,6 +1,5 @@
 <?php
-
-require_once './Validation.php';
+namespace PHPValidation;
 
 class ValidationAdditional extends Validation
 {

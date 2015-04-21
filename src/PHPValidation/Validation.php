@@ -1,4 +1,5 @@
 <?php
+namespace PHPValidation;
 
 class Validation
 {

@@ -1,0 +1,31 @@
+{
+	"name": "eclemens/php-validation",
+	"homepage": "https://github.com/eclemens/php-validation",
+	"type": "library",
+	"description": "PHP Validation class inspired by the jQuery Validation Plugin",
+	"keywords": [
+		"validator",
+		"validation",
+		"jquery-validation",
+		"php-validation"
+	],
+	"license": "MIT",
+	"authors": [{
+		"name": "Eduardo Clemens",
+		"email": "edu.clemens@gmail.com"
+	}],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.0",
+		"codeception/specify": "*",
+    	"codeception/verify": "*"
+	},
+	"include-path": ["src/"],
+	"autoload": {
+		"psr-0": {
+			"PHPValidation\\": "src/"
+		}
+	}
+}
