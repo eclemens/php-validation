@@ -8,7 +8,7 @@ composer - add the package to the require section in your composer.json file:
 ```json
 {
     "require" : {
-        "eclemens/PHPValidation": "0.1.0"
+        "eclemens/php-validation": "0.1.0"
     }
 }
 ```
@@ -19,8 +19,6 @@ composer - add the package to the require section in your composer.json file:
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
-
-use eclemens\PHPValidation;
 
 // Create validator instance
 $validator = new PHPValidation\Validation();
