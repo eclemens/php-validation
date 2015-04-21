@@ -5,7 +5,7 @@ PHP Validation class inspired by the jQuery Validation Plugin (http://jqueryvali
 
 I created this library to use along with *jQuery Validation Plugin*.
 
-This allows to use the same (or similar) rules used for *jQuery Validation Plugin* implementation in the client site to validate the request in the server side.
+It allows to use the same (or similar) rules used for *jQuery Validation Plugin* implementation in the client side to validate the request in the server side.
 
 ## Instalation
 
@@ -21,7 +21,9 @@ composer - add the package to the require section in your composer.json file:
 
 ## Usage
 
-### Basic usage
+### Basic standalone usage
+
+**PHP**
 ```php
 <?php
 
@@ -56,6 +58,7 @@ if ($validator->validate($data)) {
 
 ### Usage along with *jQuery Validation Plugin*
 
+**HTML**
 ```html
 <form>
     <input type="text" name="username">
@@ -66,6 +69,7 @@ if ($validator->validate($data)) {
 </form>
 ```
 
+**JavaScript**
 ```javascript
 $("form").validate({
     "rules": {
@@ -77,6 +81,7 @@ $("form").validate({
 });
 ```
 
+**PHP**
 ```php
 <?php
 
