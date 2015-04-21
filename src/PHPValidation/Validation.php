@@ -9,8 +9,8 @@ class Validation
     protected $rules   = [];
     protected $ignore  = [];
 
-    protected $params  = [];
-    protected $errors  = [];
+    protected $params = [];
+    protected $errors = [];
 
     public function __construct() {}
 
@@ -69,17 +69,17 @@ class Validation
      */
     public function addMethod($name, $method, $message = null)
     {
-        if (!strlen(trim($name)) && !is_callable($method)) {
+        if (!strlen(trim($name)) || !is_callable($method)) {
             return false;
         }
 
-        $validator = new \PHPValidation\Rules\Custom($this);
-        $validator->validator = $method;
+        $rule = new \PHPValidation\Rules\Custom($this);
+        $rule->method = $method;
         if (!is_null($message)) {
-            $validator->message = $message;
+            $rule->message = $message;
         }
 
-        $this->methods[$name]  = $validator;
+        $this->methods[$name] = $rule;
 
         return true;
     }
@@ -103,12 +103,14 @@ class Validation
      */
     public function valid(array $params)
     {
+        // Initialize
         $this->params = $params;
         $this->errors = [];
 
         // Cycle rule sets
-        foreach ($this->rules as $name => $rules) {
-            $value = isset($this->params[$name]) ? $this->params[$name] : null;
+        foreach ($this->rules as $field => $rules) {
+            // Field value
+            $value = isset($this->params[$field]) ? $this->params[$field] : null;
 
             // Normalize rule
             if (is_scalar($rules)) {
@@ -135,7 +137,7 @@ class Validation
                 // Validate
                 if (!$this->check($value, $rule, $options)) {
                     // Build error message
-                    $this->errors[$name] = $this->message($value, $rule, $options);
+                    $this->errors[$field] = $this->error($value, $rule, $options);
                     break;
                 }
             }
@@ -143,7 +145,6 @@ class Validation
 
         return !(bool) $this->errors;
     }
-
 
     /**
      * Call to check the required validator
@@ -157,8 +158,8 @@ class Validation
     public function check($value, $rule, $options = null)
     {
         if (!isset($this->methods[$rule])) {
-            $name = str_replace('_', '', ucwords(str_replace('_', ' ', $rule)));
-            $class     = '\\PHPValidation\\Rules\\' . $name;
+            $name  = str_replace('_', '', ucwords(str_replace('_', ' ', $rule)));
+            $class = '\\PHPValidation\\Rules\\' . $name;
             if (class_exists($class)) {
                 $this->methods[$rule] = new $class($this);
             } else {
@@ -182,7 +183,7 @@ class Validation
      *
      * @return string
      */
-    protected function message($value, $rule, $options = null)
+    protected function error($value, $rule, $options = null)
     {
         $message;
 
@@ -235,7 +236,8 @@ class Validation
      *
      * @return boolean
      */
-    public function depend($options, $value = null) {
+    public function depend($options, $value = null)
+    {
         if (is_bool($options)) {
             return $options;
         } elseif (is_string($options)) {

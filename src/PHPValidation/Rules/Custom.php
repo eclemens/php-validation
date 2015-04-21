@@ -3,14 +3,14 @@
 namespace PHPValidation\Rules;
 
 /**
- * User added validator.
+ * User added rule.
  *
  * `custom`
  */
 class Custom extends Base
 {
-    public $message   = "Please enter a valid value.";
-    public $validator;
+    public $message = "Please enter a valid value.";
+    public $method;
 
     /**
      * Makes the element require a date.
@@ -22,8 +22,8 @@ class Custom extends Base
      */
     public function validate($value, $options = null)
     {
-        if (isset($this->validator) && is_callable($this->validator)) {
-            return (bool) call_user_func($this->validator, $value, $options);
+        if (isset($this->method) && is_callable($this->method)) {
+            return (bool) call_user_func($this->method, $value, $options);
         }
 
         return false;
