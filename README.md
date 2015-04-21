@@ -28,7 +28,7 @@ $validator = new PHPValidation\Validation();
 // Add rules
 $validator->rules([
     'username'   => ['required' => true, 'rangelength' => [3, 64]],
-    'email'      => ['required' => true, 'email'true],
+    'email'      => ['required' => true, 'email' => true],
     'password'   => ['required' => true],
     'repassword' => ['equalTo' => 'password'],
 ]);
