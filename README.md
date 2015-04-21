@@ -1,5 +1,11 @@
 # php-validation
-PHP Validation class inspired by the jQuery Validation Plugin
+PHP Validation class inspired by the jQuery Validation Plugin (http://jqueryvalidation.org/)
+
+## Description
+
+I created this library to use along with *jQuery Validation Plugin*.
+
+This allows to use the same (or similar) rules used for *jQuery Validation Plugin* implementation in the client site to validate the request in the server side.
 
 ## Instalation
 
@@ -14,6 +20,62 @@ composer - add the package to the require section in your composer.json file:
 ```
 
 ## Usage
+
+### Basic usage
+```php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Create validator instance
+$validator = new PHPValidation\Validation();
+
+// Add rules
+$validator->rules([
+    'username'   => ['required' => true, 'rangelength' => [3, 64]],
+    'email'      => ['required' => true, 'email' => true],
+    'password'   => ['required' => true],
+    'repassword' => ['equalTo' => 'password']
+]);
+
+// Data
+$data = [
+    'username'   => 'johndoe',
+    'email'      => 'johndoe@example.org',
+    'password'   => 'pass1234',
+    'repassword' => 'pass1234'
+];
+
+// Validate:
+if ($validator->validate($data)) {
+    // It's a valid data!
+}
+
+?>
+```
+
+### Usage along with *jQuery Validation Plugin*
+
+```html
+<form>
+    <input type="text" name="username">
+    <input type="email" name="email">
+    <input type="password" name="password">
+    <input type="repassword" name="repassword">
+    <input type="submit" name="submit">
+</form>
+```
+
+```javascript
+$("form").validate({
+    "rules": {
+        "username":   {"required" => true, "rangelength" => [3, 64]},
+        "email":      {"required" => true, "email" => true},
+        "password":   {"required" => true},
+        "repassword": {"equalTo" => "[name=password]"}
+    }
+});
+```
 
 ```php
 <?php
@@ -31,16 +93,8 @@ $validator->rules([
     'repassword' => ['equalTo' => 'password'],
 ]);
 
-// Data
-$data = [
-    'username'   => 'johndoe',
-    'email'      => 'johndoe@example.org',
-    'password'   => 'pass1234',
-    'repassword' => 'pass1234'
-];
-
 // Validate:
-if ($validator->validate($data)) {
+if ($validator->validate($_REQUEST)) {
     // It's a valid data!
 }
 
