@@ -73,10 +73,10 @@ if ($validator->valid($data)) {
 ```javascript
 $("form").validate({
     "rules": {
-        "username":   {"required" => true, "rangelength" => [3, 64]},
-        "email":      {"required" => true, "email" => true},
-        "password":   {"required" => true},
-        "repassword": {"equalTo" => "[name=password]"}
+        "username":   {"required": true, "rangelength": [3, 64]},
+        "email":      {"required": true, "email": true},
+        "password":   {"required": true},
+        "repassword": {"equalTo": "[name=password]"}
     }
 });
 ```
