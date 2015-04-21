@@ -226,5 +226,52 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($this->validation->valid(['field' => 'http://google.com/']));
             $this->assertFalse($this->validation->valid(['field' => 'google.com']));
         });
+
+        $this->specify('Test "Custom"', function() {
+            $this->validation->rules([
+                'field' => [
+                    'required' => true, 'zipcode' => true
+                ]
+            ]);
+
+            $this->validation->addMethod(
+                "zipcode",
+                function ($value) {
+                    return $value && preg_match('/^\d{5}(?:-\d{4})?$/', $value);
+                },
+                "Please provide a valid zipcode"
+            );
+
+            $this->assertFalse($this->validation->valid(['field' => '']));
+            $this->assertTrue($this->validation->valid(['field' => '55555']));
+            $this->assertTrue($this->validation->valid(['field' => '55555-4444']));
+            $this->assertFalse($this->validation->valid(['field' => '5555']));
+            $this->assertFalse($this->validation->valid(['field' => '555554444']));
+            $this->assertFalse($this->validation->valid(['field' => '55555-444']));
+        });
+
+        $this->specify('Test "Custom" without `required`', function() {
+            $this->validation->rules([
+                'field' => [
+                    'required' => false, 'zipcode' => true
+                ]
+            ]);
+
+            $validation = $this->validation;
+            $this->validation->addMethod(
+                "zipcode",
+                function ($value) use ($validation) {
+                    return $validation->optional($value) || preg_match('/^\d{5}(?:-\d{4})?$/', $value);
+                },
+                "Please provide a valid zipcode"
+            );
+
+            $this->assertTrue($this->validation->valid(['field' => '']));
+            $this->assertTrue($this->validation->valid(['field' => '55555']));
+            $this->assertTrue($this->validation->valid(['field' => '55555-4444']));
+            $this->assertFalse($this->validation->valid(['field' => '5555']));
+            $this->assertFalse($this->validation->valid(['field' => '555554444']));
+            $this->assertFalse($this->validation->valid(['field' => '55555-444']));
+        });
     }
 }

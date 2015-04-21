@@ -69,8 +69,19 @@ class Validation
      */
     public function addMethod($name, $method, $message = null)
     {
-        $this->methods[$name]  = $method;
-        $this->messages[$name] = $message ?: @$this->messages[$name] ?: null;
+        if (!strlen(trim($name)) && !is_callable($method)) {
+            return false;
+        }
+
+        $validator = new \PHPValidation\Rules\Custom($this);
+        $validator->validator = $method;
+        if (!is_null($message)) {
+            $validator->message = $message;
+        }
+
+        $this->methods[$name]  = $validator;
+
+        return true;
     }
 
     /**
@@ -133,7 +144,6 @@ class Validation
         return !(bool) $this->errors;
     }
 
-    public $validators = [];
 
     /**
      * Call to check the required validator
@@ -146,19 +156,21 @@ class Validation
      */
     public function check($value, $rule, $options = null)
     {
-        if (!isset($this->validators[$rule])) {
+        if (!isset($this->methods[$rule])) {
             $name = str_replace('_', '', ucwords(str_replace('_', ' ', $rule)));
-            $class = '\\PHPValidation\\Rules\\' . $name;
+            $class     = '\\PHPValidation\\Rules\\' . $name;
             if (class_exists($class)) {
-                $this->validators[$rule] = new $class($this);
+                $this->methods[$rule] = new $class($this);
             } else {
                 throw new \Exception(sprintf("The rule \"%s\" doesn't exist", [$rule]), 1);
             }
         }
 
-        if (isset($this->validators[$rule])) {
-            return $this->validators[$rule]->validate($value, $options);
+        if (isset($this->methods[$rule])) {
+            return $this->methods[$rule]->validate($value, $options);
         }
+
+        return false;
     }
 
     /**
@@ -176,11 +188,11 @@ class Validation
 
         if (isset($this->messages[$rule])) {
             $message = $this->messages[$rule];
-        } elseif (isset($this->validators[$rule])) {
-            $message = $this->validators[$rule]->message;
+        } elseif (isset($this->methods[$rule])) {
+            $message = $this->methods[$rule]->message;
         }
 
-        if (is_string($message)) {
+        if (isset($message) && is_string($message)) {
             if (is_array($options)) {
                 $message = @vsprintf($message, $options);
             } else {
@@ -235,15 +247,6 @@ class Validation
         }
 
         return true;
-    }
-
-    protected function custom($value, $rule, $options = null)
-    {
-        if (isset($this->methods[$rule]) && is_callable($this->methods[$rule])) {
-            return $this->optional($value) || $this->methods[$rule]($value, $options);
-        }
-
-        return false;
     }
 
     public function param($name)
