@@ -49,7 +49,7 @@ $data = [
 ];
 
 // Validate:
-if ($validator->validate($data)) {
+if ($validator->valid($data)) {
     // It's a valid data!
 }
 
@@ -99,7 +99,7 @@ $validator->rules([
 ]);
 
 // Validate:
-if ($validator->validate($_REQUEST)) {
+if ($validator->valid($_REQUEST)) {
     // It's a valid data!
 }
 
