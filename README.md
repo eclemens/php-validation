@@ -1,7 +1,7 @@
 # php-validation
 PHP Validation class inspired by the jQuery Validation Plugin
 
-# Instalation
+## Instalation
 
 composer - add the package to the require section in your composer.json file:
 
@@ -13,7 +13,7 @@ composer - add the package to the require section in your composer.json file:
 }
 ```
 
-# Usage
+## Usage
 
 ```php
 <?php
@@ -47,5 +47,5 @@ if ($validator->validate($data)) {
 ?>
 ```
 
-# TODO
+## TODO
 * i18n
