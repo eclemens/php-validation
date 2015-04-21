@@ -22,6 +22,6 @@ class Date extends Base
     public function validate($value, $options = null)
     {
         $time = strtotime($value);
-        return $this->validation->optional($value) || is_numeric($time) && $time != -1;
+        return $this->validation->optional($value) || (is_numeric($time) && $time != -1);
     }
 }
