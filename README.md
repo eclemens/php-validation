@@ -43,4 +43,9 @@ $data = [
 if ($validator->validate($data)) {
     // It's a valid data!
 }
+
+?>
 ```
+
+# TODO
+* i18n
