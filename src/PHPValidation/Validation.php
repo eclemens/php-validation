@@ -185,10 +185,14 @@ class Validation
      */
     protected function error($value, $rule, $options = null, $field = null)
     {
-        $message;
+        $message = null;
 
-        if (isset($this->messages[$rule])) {
-            $message = $this->messages[$rule];
+        if (isset($field) && isset($this->messages[$field])) {
+            if (is_array($this->messages[$field]) && isset($this->messages[$field][$rule])) {
+                $message = $this->messages[$field][$rule];
+            } else {
+                $message = $this->messages[$field];
+            }
         } elseif (isset($this->methods[$rule])) {
             $message = $this->methods[$rule]->message($options, $value, $field);
         }
