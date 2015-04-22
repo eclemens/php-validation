@@ -135,9 +135,9 @@ class Validation
                 }
 
                 // Validate
-                if (!$this->check($value, $rule, $options)) {
+                if (!$this->check($value, $rule, $options, $field)) {
                     // Build error message
-                    $this->errors[$field] = $this->error($value, $rule, $options);
+                    $this->errors[$field] = $this->error($value, $rule, $options, $field);
                     break;
                 }
             }
@@ -155,7 +155,7 @@ class Validation
      *
      * @return boolean
      */
-    public function check($value, $rule, $options = null)
+    public function check($value, $rule, $options = null, $field = null)
     {
         if (!isset($this->methods[$rule])) {
             $name  = str_replace('_', '', ucwords(str_replace('_', ' ', $rule)));
@@ -168,7 +168,7 @@ class Validation
         }
 
         if (isset($this->methods[$rule])) {
-            return $this->methods[$rule]->validate($value, $options);
+            return $this->methods[$rule]->validate($value, $options, $field);
         }
 
         return false;
@@ -183,18 +183,18 @@ class Validation
      *
      * @return string
      */
-    protected function error($value, $rule, $options = null)
+    protected function error($value, $rule, $options = null, $field = null)
     {
         $message;
 
         if (isset($this->messages[$rule])) {
             $message = $this->messages[$rule];
         } elseif (isset($this->methods[$rule])) {
-            $message = $this->methods[$rule]->message($options, $value);
+            $message = $this->methods[$rule]->message($options, $value, $field);
         }
 
         if (is_callable($message)) {
-            $message = $message($options, $value);
+            $message = call_user_func($message, $options, $value, $field);
         }
 
         if (isset($message) && is_string($message)) {
@@ -243,7 +243,7 @@ class Validation
         } elseif (is_string($options)) {
             return isset($his->params[$options]);
         } elseif (is_callable($options)) {
-            return (bool) $options($value);
+            return (bool) call_user_func($options, $value);
         }
 
         return true;

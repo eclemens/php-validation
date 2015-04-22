@@ -19,7 +19,7 @@ class DateISO extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         return $this->validation->optional($value) || preg_match('/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/', $value);
     }

@@ -12,7 +12,7 @@ abstract class Base implements RuleInterface {
         $this->validation = $validation;
     }
 
-    public function message($options, $value) {
+    public function message($options, $value, $field = null) {
         return $this->message;
     }
 }

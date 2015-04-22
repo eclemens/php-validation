@@ -15,7 +15,7 @@ class MinWords extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         return $this->validation->optional($value) || preg_match_all('/\b\w+\b/', strip_tags($value)) >= $options;
     }

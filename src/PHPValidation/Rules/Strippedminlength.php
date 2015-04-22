@@ -17,7 +17,7 @@ class Strippedminlength extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         return strlen(trim(strip_tags($value))) >= $options;
     }

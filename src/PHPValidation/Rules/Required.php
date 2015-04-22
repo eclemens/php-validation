@@ -19,7 +19,7 @@ class Required extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         if (!$this->validation->depend($options, $value)) {
             return true;

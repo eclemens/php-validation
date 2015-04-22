@@ -1,0 +1,21 @@
+<?php
+
+namespace PHPValidation\Entities;
+
+class Rule
+{
+    public $name;
+    public $options;
+
+    public function __contructor($name, $options)
+    {
+        if (is_numeric($name) || !is_string($name) || !strlen(trim($name))) {
+        	if (is_string($options) && strlen(trim($options))) {
+	            $this->name    = $options;
+	            $this->options = true;
+	        } else {
+	        	throw new InvalidArgumentException("Error Processing Request", 1);
+	        }
+        }
+    }
+}

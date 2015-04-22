@@ -48,7 +48,7 @@ class StateUS extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         $isDefault          = isset($options);
         $caseSensitive      = ($isDefault || isset($options['caseSensitive'])) ? false : $options['caseSensitive'];

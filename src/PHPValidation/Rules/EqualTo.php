@@ -19,7 +19,7 @@ class EqualTo extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         $param = $this->validation->param($options);
         return isset($param) && $value === $param;

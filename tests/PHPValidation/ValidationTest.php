@@ -184,11 +184,11 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '9']));
         });
 
-        $this->specify('Test "Remote"', function() {
+        $this->specify('Test "Callback"', function() {
             $validation = $this->validation;
             $this->validation->rules([
                 'field' => [
-                    'required' => true, 'remote' => function($value) use ($validation) {
+                    'required' => true, 'callback' => function($value) use ($validation) {
                         return $this->validation->optional($value) || (bool) $value;
                     }
                 ]
@@ -198,6 +198,19 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($this->validation->valid(['field' => true]));
             $this->assertFalse($this->validation->valid(['field' => false]));
         });
+
+        //$this->specify('Test "Remote"', function() {
+        //    $validation = $this->validation;
+        //    $this->validation->rules([
+        //        'field' => [
+        //            'required' => true, 'remote' => ['url'=> 'http://localhost/valid.php', 'method' => 'post']
+        //        ]
+        //    ]);
+        //
+        //    $this->assertFalse($this->validation->valid(['field' => '']));
+        //    $this->assertTrue($this->validation->valid(['field' => 1]));
+        //    $this->assertFalse($this->validation->valid(['field' => 0]));
+        //});
 
         $this->specify('Test "Required"', function() {
             $this->validation->rules([

@@ -1,0 +1,15 @@
+<?php
+
+namespace PHPValidation\Entities;
+
+class Field
+{
+    public $value;
+    public $name;
+
+    public function __contructor($value, $name = null)
+    {
+        $this->value = $value;
+        $this->name  = $name;
+    }
+}

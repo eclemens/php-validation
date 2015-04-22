@@ -15,7 +15,7 @@ class Ziprange extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         return $this->validation->optional($value) || preg_match('/^90[2-5]\d{2}-\d{4}$/', $value);
     }

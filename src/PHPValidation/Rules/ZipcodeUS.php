@@ -15,7 +15,7 @@ class ZipcodeUS extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         return $this->validation->optional($value) || preg_match('/^\d{5}(-\d{4})?$/', $value);
     }

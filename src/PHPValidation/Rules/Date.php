@@ -19,7 +19,7 @@ class Date extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         $time = strtotime($value);
         return $this->validation->optional($value) || (is_numeric($time) && $time != -1);

@@ -15,7 +15,7 @@ class Lettersonly extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         return $this->validation->optional($value) || preg_match('/^[a-z]+$/i', $value);
     }

@@ -42,7 +42,7 @@ class Currency extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         $isParamString = is_string($options);
         $symbol        = $isParamString ? $options : $options[0];

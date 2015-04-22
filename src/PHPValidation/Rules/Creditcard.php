@@ -19,7 +19,7 @@ class Creditcard extends Base
      *
      * @return boolean
      */
-    public function validate($value, $options = null)
+    public function validate($value, $options = null, $field = null)
     {
         // accept only spaces, digits and dashes
         if (preg_match('/[^0-9 \-]+/', $value)) {
