@@ -5,6 +5,9 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a credit card number.
  *
+ * http://jqueryvalidation.org/creditcard-method/
+ * based on http://en.wikipedia.org/wiki/Luhn/
+ *
  * `creditcard`
  */
 class Creditcard extends Base

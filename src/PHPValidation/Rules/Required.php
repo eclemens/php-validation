@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element required.
  *
+ * http://jqueryvalidation.org/required-method/
+ *
  * `required`
  */
 class Required extends Base

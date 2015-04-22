@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require digits only.
  *
+ * http://jqueryvalidation.org/digits-method/
+ *
  * `digits`
  */
 class Digits extends Base

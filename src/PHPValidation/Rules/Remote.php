@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Requests a resource to check the element for validity.
  *
+ * http://jqueryvalidation.org/remote-method/
+ *
  * `remote`
  */
 class Remote extends Base

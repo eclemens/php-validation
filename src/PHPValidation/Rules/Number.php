@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a decimal number.
  *
+ * http://jqueryvalidation.org/number-method/
+ *
  * `number`
  */
 class Number extends Base

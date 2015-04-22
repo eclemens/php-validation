@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a given maxmimum length.
  *
+ * http://jqueryvalidation.org/maxlength-method/
+ *
  * `maxlength`
  */
 class Maxlength extends Base

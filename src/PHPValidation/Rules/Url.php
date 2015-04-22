@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a valid url
  *
+ * http://jqueryvalidation.org/url-method/
+ *
  * `url`
  */
 class Url extends Base

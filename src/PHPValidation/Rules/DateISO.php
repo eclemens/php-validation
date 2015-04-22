@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require an ISO date.
  *
+ * http://jqueryvalidation.org/dateISO-method/
+ *
  * `dateISO`
  */
 class DateISO extends Base

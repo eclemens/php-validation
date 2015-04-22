@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a given minimum length.
  *
+ * http://jqueryvalidation.org/minlength-method/
+ *
  * `minlength`
  */
 class Minlength extends Base

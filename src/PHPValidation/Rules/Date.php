@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a date.
  *
+ * http://jqueryvalidation.org/date-method/
+ *
  * `date`
  */
 class Date extends Base

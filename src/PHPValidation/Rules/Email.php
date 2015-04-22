@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a valid email.
  *
+ * http://jqueryvalidation.org/email-method/
+ *
  * `email`
  */
 class Email extends Base

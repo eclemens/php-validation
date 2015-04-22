@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a given minimum.
  *
+ * http://jqueryvalidation.org/min-method/
+ *
  * `min`
  */
 class Min extends Base

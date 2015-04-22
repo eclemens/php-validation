@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Requires the element to be the same as another one.
  *
+ * http://jqueryvalidation.org/equalTo-method/
+ *
  * `equalTo`
  */
 class EqualTo extends Base

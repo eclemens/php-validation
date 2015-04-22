@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a given value range.
  *
+ * http://jqueryvalidation.org/rangelength-method/
+ *
  * `rangelength`
  */
 class Rangelength extends Base

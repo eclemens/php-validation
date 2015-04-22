@@ -5,6 +5,8 @@ namespace PHPValidation\Rules;
 /**
  * Makes the element require a given maximum.
  *
+ * http://jqueryvalidation.org/max-method/
+ *
  * `max`
  */
 class Max extends Base
