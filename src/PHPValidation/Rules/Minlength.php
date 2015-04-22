@@ -9,7 +9,7 @@ namespace PHPValidation\Rules;
  */
 class Minlength extends Base
 {
-    public $message = "Please enter at least %s characters.";
+    public $message = "Please enter at least {0} characters.";
 
     /**
      * Makes the element require a given minimum length.

@@ -9,7 +9,7 @@ namespace PHPValidation\Rules;
  */
 class Maxlength extends Base
 {
-    public $message = "Please enter no more than %s characters.";
+    public $message = "Please enter no more than {0} characters.";
 
     /**
      * Makes the element require a given maxmimum length.

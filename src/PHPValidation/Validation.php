@@ -7,7 +7,6 @@ class Validation
 
     protected $methods = [];
     protected $rules   = [];
-    protected $ignore  = [];
 
     protected $params = [];
     protected $errors = [];
@@ -31,7 +30,7 @@ class Validation
      */
     public function messages(array $messages)
     {
-        $this->messages = array_merge($this->messages, $messages);
+        $this->messages = array_replace_recursive($this->messages, $messages);
     }
 
     /**
@@ -50,16 +49,6 @@ class Validation
     }
 
     /**
-     * Elements to ignore when validating, simply filtering them out.
-     *
-     * @param  array   $fields
-     */
-    public function ignore(array $fields)
-    {
-        $this->ignore = $fields;
-    }
-
-    /**
      * Add a custom validation method.
      * It must consist of a name, a lambda function and a default string message.
      *
@@ -73,7 +62,7 @@ class Validation
             return false;
         }
 
-        $rule = new \PHPValidation\Rules\Custom($this);
+        $rule         = new \PHPValidation\Rules\Custom($this);
         $rule->method = $method;
         if (!is_null($message)) {
             $rule->message = $message;
@@ -202,14 +191,36 @@ class Validation
         }
 
         if (isset($message) && is_string($message)) {
-            if (is_array($options)) {
-                $message = @vsprintf($message, $options) ?: $message;
-            } else {
-                $message = @sprintf($message, $options) ?: $message;
-            }
+            $message = $this->format($message, $options);
         }
 
-        return is_string($message) ? $message : '';
+        return is_scalar($message) ? $message : '';
+    }
+
+    /**
+     * Replaces {n} placeholders with arguments.
+     */
+    protected function format($source, $params)
+    {
+        $argsv = func_get_args();
+        $argsc = func_num_args();
+
+        if ($argsc > 2 && !is_array($params)) {
+            $params = array_slice($argsv, 1);
+        }
+        if (!is_array($params)) {
+            $params = [$params];
+        }
+        foreach ($params as $i => $n) {
+            $source = preg_replace("/\{" . preg_quote($i) . "\}/", $n, $source);
+        }
+
+        return $source;
+    }
+
+    public function param($name)
+    {
+        return @$this->params[$name];
     }
 
     /*=============================
@@ -251,10 +262,5 @@ class Validation
         }
 
         return true;
-    }
-
-    public function param($name)
-    {
-        return @$this->params[$name];
     }
 }

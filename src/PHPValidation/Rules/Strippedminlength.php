@@ -7,7 +7,7 @@ namespace PHPValidation\Rules;
  */
 class Strippedminlength extends Base
 {
-    public $message = "Please enter at least %s characters.";
+    public $message = "Please enter at least {0} characters.";
 
     /**
      * TODO check if value starts with <, otherwise don't try stripping anything

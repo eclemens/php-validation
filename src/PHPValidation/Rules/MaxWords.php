@@ -7,7 +7,7 @@ namespace PHPValidation\Rules;
  */
 class MaxWords extends Base
 {
-    public $message = "Please enter %s words or less.";
+    public $message = "Please enter {0} words or less.";
 
     /**
      * @param  mixed $value

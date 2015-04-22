@@ -13,7 +13,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
 
     public function testValidation()
     {
-        $this->specify('Test "Creditcard"', function() {
+        $this->specify('Test "Creditcard"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'creditcard' => true
@@ -25,7 +25,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '5555555555555555']));
         });
 
-        $this->specify('Test "DateISO"', function() {
+        $this->specify('Test "DateISO"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'dateISO' => true
@@ -37,7 +37,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '2012/31/12']));
         });
 
-        $this->specify('Test "Date"', function() {
+        $this->specify('Test "Date"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'date' => true
@@ -51,7 +51,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '2012/13/13']));
         });
 
-        $this->specify('Test "Digits"', function() {
+        $this->specify('Test "Digits"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'digits' => true
@@ -64,7 +64,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => 'ten']));
         });
 
-        $this->specify('Test "Email"', function() {
+        $this->specify('Test "Email"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'email' => true
@@ -76,7 +76,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => 'john@example']));
         });
 
-        $this->specify('Test "EqualTo"', function() {
+        $this->specify('Test "EqualTo"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'equalTo' => 'other'
@@ -88,7 +88,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '10', 'other' => '11']));
         });
 
-        $this->specify('Test "Maxlength"', function() {
+        $this->specify('Test "Maxlength"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'maxlength' => 5
@@ -100,7 +100,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '123456']));
         });
 
-        $this->specify('Test "Max"', function() {
+        $this->specify('Test "Max"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'max' => 5
@@ -113,7 +113,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '6']));
         });
 
-        $this->specify('Test "Minlength"', function() {
+        $this->specify('Test "Minlength"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'minlength' => 5
@@ -121,11 +121,11 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             ]);
 
             $this->assertFalse($this->validation->valid(['field' => '']));
-            $this->assertFalse($this->validation->valid(['field' => 'john']));
             $this->assertTrue($this->validation->valid(['field' => 'john doe']));
+            $this->assertFalse($this->validation->valid(['field' => 'john']));
         });
 
-        $this->specify('Test "Min"', function() {
+        $this->specify('Test "Min"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'min' => 5
@@ -138,7 +138,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '4']));
         });
 
-        $this->specify('Test "Number"', function() {
+        $this->specify('Test "Number"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'number' => true
@@ -155,7 +155,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => 'ten']));
         });
 
-        $this->specify('Test "Rangelength"', function() {
+        $this->specify('Test "Rangelength"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'rangelength' => [5, 8]
@@ -169,7 +169,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => 'smith doe']));
         });
 
-        $this->specify('Test "Range"', function() {
+        $this->specify('Test "Range"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'range' => [5, 8]
@@ -184,11 +184,11 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '9']));
         });
 
-        $this->specify('Test "Callback"', function() {
+        $this->specify('Test "Callback"', function () {
             $validation = $this->validation;
             $this->validation->rules([
                 'field' => [
-                    'required' => true, 'callback' => function($value) use ($validation) {
+                    'required' => true, 'callback' => function ($value) use ($validation) {
                         return $this->validation->optional($value) || (bool) $value;
                     }
                 ]
@@ -212,7 +212,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
         //    $this->assertFalse($this->validation->valid(['field' => 0]));
         //});
 
-        $this->specify('Test "Required"', function() {
+        $this->specify('Test "Required"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'required' => true
@@ -228,7 +228,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '']));
         });
 
-        $this->specify('Test "Url"', function() {
+        $this->specify('Test "Url"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'url' => true
@@ -240,7 +240,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => 'google.com']));
         });
 
-        $this->specify('Test "Custom"', function() {
+        $this->specify('Test "Custom"', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => true, 'zipcode' => true
@@ -252,7 +252,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
                 function ($value) {
                     return $value && preg_match('/^\d{5}(?:-\d{4})?$/', $value);
                 },
-                "Please provide a valid zipcode"
+                "Please provide a valid zipcode."
             );
 
             $this->assertFalse($this->validation->valid(['field' => '']));
@@ -263,7 +263,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
             $this->assertFalse($this->validation->valid(['field' => '55555-444']));
         });
 
-        $this->specify('Test "Custom" without `required`', function() {
+        $this->specify('Test "Custom" without `required`', function () {
             $this->validation->rules([
                 'field' => [
                     'required' => false, 'zipcode' => true
@@ -276,7 +276,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
                 function ($value) use ($validation) {
                     return $validation->optional($value) || preg_match('/^\d{5}(?:-\d{4})?$/', $value);
                 },
-                "Please provide a valid zipcode"
+                "Please provide a valid zipcode."
             );
 
             $this->assertTrue($this->validation->valid(['field' => '']));

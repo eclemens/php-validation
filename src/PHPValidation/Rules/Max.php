@@ -9,7 +9,7 @@ namespace PHPValidation\Rules;
  */
 class Max extends Base
 {
-    public $message = "Please enter a value less than or equal to %s.";
+    public $message = "Please enter a value less than or equal to {0}.";
 
     /**
      * Makes the element require a given maximum.

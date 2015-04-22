@@ -7,7 +7,7 @@ namespace PHPValidation\Rules;
  */
 class RangeWords extends Base
 {
-    public $message = "Please enter between %s and %s words.";
+    public $message = "Please enter between {0} and {1} words.";
 
     /**
      * @param  mixed $value

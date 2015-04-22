@@ -9,7 +9,7 @@ namespace PHPValidation\Rules;
  */
 class Range extends Base
 {
-    public $message = "Please enter a value between %s and %s.";
+    public $message = "Please enter a value between {0} and {1}.";
 
     /**
      * Makes the element require a given value range.
