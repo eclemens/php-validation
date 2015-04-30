@@ -1,15 +1,21 @@
 # php-validation
 PHP Validation class inspired by the jQuery Validation Plugin (http://jqueryvalidation.org/)
 
-## Description
+Description
+------------
 
 I created this library to use along with *jQuery Validation Plugin*.
 
 It allows to use the same (or similar) rules used for *jQuery Validation Plugin* implementation in the client side to validate the request in the server side.
 
-## Instalation
+Installation
+------------
 
-composer - add the package to the require section in your composer.json file:
+Install using [composer](http://getcomposer.org/). Exists as
+[eclemens/php-validation](https://packagist.org/packages/eclemens/php-validation)
+in the [packagist](https://packagist.org/) repository.
+
+Add the package to the require section in your composer.json file:
 
 ```json
 {
@@ -19,7 +25,8 @@ composer - add the package to the require section in your composer.json file:
 }
 ```
 
-## Usage
+Usage
+-----
 
 ### Basic standalone usage
 
@@ -53,7 +60,6 @@ if ($validator->valid($data)) {
     // It's a valid data!
 }
 
-?>
 ```
 
 ### Usage along with *jQuery Validation Plugin*
@@ -103,8 +109,9 @@ if ($validator->valid($_REQUEST)) {
     // It's a valid data!
 }
 
-?>
 ```
 
-## TODO
+TODO
+-------
+* Missing additional rules
 * i18n
