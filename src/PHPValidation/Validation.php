@@ -49,6 +49,22 @@ class Validation
     }
 
     /**
+     * Defining custom rule.
+     *
+     * Rules is an object consisting of rule/parameter
+     * pairs or a plain String. Can be combined with class/attribute/data rules.
+     * Each rule can be specified as having a depends-property to apply the rule
+     * only in certain conditions.
+     *
+     * @param  string $name
+     * @param  array  $rules
+     */
+    public function rule($name, $rules)
+    {
+        $this->rules[$name] = $rules;
+    }
+
+    /**
      * Add a custom validation method.
      * It must consist of a name, a lambda function and a default string message.
      *
